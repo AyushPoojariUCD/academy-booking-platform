@@ -4,6 +4,11 @@ import React, { useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import {
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -41,21 +46,30 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Desktop Button */}
-        <div className="hidden md:block">
-          <Button
-            className="
-              bg-black
-              hover:bg-[#C9A14A]
-              text-white
-              font-semibold
-              px-6
-              py-2
-              transition-all duration-300
-            "
-          >
-            Login / Sign In
-          </Button>
+        {/* Desktop Auth Buttons */}
+        <div className="hidden md:flex items-center gap-4">
+
+          <SignedOut>
+            <Link href="/sign-in">
+              <Button className="bg-black hover:bg-[#C9A14A] text-white font-semibold px-6 py-2">
+                Sign In
+              </Button>
+            </Link>
+
+            <Link href="/sign-up">
+              <Button
+                variant="outline"
+                className="border-black text-black hover:bg-[#C9A14A] hover:text-white font-semibold px-6 py-2"
+              >
+                Sign Up
+              </Button>
+            </Link>
+          </SignedOut>
+
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
+
         </div>
 
         {/* Mobile Hamburger */}
@@ -81,19 +95,24 @@ const Navbar = () => {
               </Link>
             ))}
 
-            <Button
-              className="
-                bg-black
-                hover:bg-[#C9A14A]
-                text-white
-                font-semibold
-                px-6
-                py-2
-                transition-all duration-300
-              "
-            >
-              Login / Sign In
-            </Button>
+            <SignedOut>
+              <Link href="/sign-in">
+                <Button className="bg-black text-white px-6 py-2">
+                  Sign In
+                </Button>
+              </Link>
+
+              <Link href="/sign-up">
+                <Button variant="outline" className="border-black text-black px-6 py-2">
+                  Sign Up
+                </Button>
+              </Link>
+            </SignedOut>
+
+            <SignedIn>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
+
           </div>
         </div>
       )}

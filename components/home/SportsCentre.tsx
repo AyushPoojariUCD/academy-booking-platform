@@ -172,7 +172,7 @@ export default function SportsCenters() {
                       font-semibold
                       transition-all duration-300
                     ">
-                      Book Now
+                      View Details
                     </button>
                   </Link>
                 </div>
