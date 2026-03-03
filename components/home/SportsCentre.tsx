@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useEffect, useState } from "react"
 
 export type Center = {
   id: number
@@ -65,121 +66,123 @@ export const centers: Center[] = [
   },
 ]
 
-export default function SportsCenters() {
-  return (
-    <section className="w-full py-12 bg-gray-50">
+const title = "SPORTS CENTERS"
 
+export default function SportsCenters() {
+  const [text, setText] = useState("")
+  const [index, setIndex] = useState(0)
+
+  useEffect(() => {
+    if (index < title.length) {
+      const timeout = setTimeout(() => {
+        setText((prev) => prev + title[index])
+        setIndex(index + 1)
+      }, 60)
+
+      return () => clearTimeout(timeout)
+    }
+  }, [index])
+
+  return (
+    <section className="w-full py-16 bg-gray-50">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
         {/* Heading */}
-        <div className="text-center mb-14">
-
+        <div className="text-center mb-16">
           <p className="text-sm tracking-[0.25em] text-[#C9A14A] font-semibold mb-3">
             OUR CENTERS
           </p>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold">
-            SPORTS CENTERS
+            {text}
+            <span className="animate-pulse text-[#C9A14A]">|</span>
           </h2>
-
         </div>
-
 
         {/* Cards */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-8">
           {centers.map((center) => (
+            <div
+              key={center.id}
+              className="
+                flex flex-col sm:flex-row
+                bg-white
+                rounded-2xl
+                border border-gray-200
+                shadow-sm
+                hover:shadow-[0_10px_30px_rgba(201,161,74,0.2)]
+                hover:border-[#C9A14A]
+                hover:-translate-y-1
+                transition-all duration-300
+                overflow-hidden
+              "
+            >
 
-  <div
-    key={center.id}
-    className="
-      flex flex-col sm:flex-row
-      bg-white
-      rounded-xl
-      shadow-sm
-      hover:shadow-lg
-      transition-all duration-300
-      overflow-hidden
-    "
-  >
+              {/* Image */}
+              <Link
+                href={`/centers/${center.slug}`}
+                className="w-full sm:w-52 h-48 sm:h-auto flex-shrink-0 block overflow-hidden"
+              >
+                <img
+                  src={center.image}
+                  alt={center.name}
+                  className="w-full h-full object-cover hover:scale-110 transition duration-500"
+                />
+              </Link>
 
-    {/* Image Link */}
-    <Link
-      href={`/centers/${center.slug}`}
-      className="w-full sm:w-44 md:w-52 h-48 sm:h-auto flex-shrink-0 block"
-    >
-      <img
-        src={center.image}
-        alt={center.name}
-        className="w-full h-full object-cover hover:scale-105 transition"
-      />
-    </Link>
+              {/* Content */}
+              <div className="flex flex-col flex-1 p-6 justify-between">
 
+                <div>
+                  <Link href={`/centers/${center.slug}`}>
+                    <h3 className="font-semibold text-lg md:text-xl hover:text-[#C9A14A] transition cursor-pointer">
+                      {center.name}
+                    </h3>
+                  </Link>
 
-    {/* Content */}
-    <div className="flex flex-col flex-1 p-5 justify-between">
+                  <p className="text-gray-500 text-sm mt-2 line-clamp-2">
+                    {center.address}
+                  </p>
 
-      <div>
+                  <div className="text-sm text-gray-500 mt-3">
+                    📍 {center.city}
+                    <span className="mx-2">|</span>
+                    🏸 {center.sport}
+                  </div>
 
-        {/* Title Link */}
-        <Link href={`/centers/${center.slug}`}>
-          <h3 className="font-semibold text-lg md:text-xl hover:text-[#C9A14A] transition cursor-pointer">
-            {center.name}
-          </h3>
-        </Link>
+                  <div className="text-sm text-gray-500 mt-1">
+                    📞 {center.phone}
+                  </div>
 
-        <p className="text-gray-500 text-sm mt-1 line-clamp-2">
-          {center.address}
-        </p>
+                  <div className="text-sm text-gray-500 mt-1">
+                    🕒 {center.time}
+                  </div>
+                </div>
 
-        <div className="text-sm text-gray-500 mt-2">
-          📍 {center.city}
-          <span className="mx-2">|</span>
-          🏸 {center.sport}
-        </div>
+                {/* Book Button */}
+                <div className="mt-5 sm:mt-0 sm:self-end">
+                  <Link href={`/centers/${center.slug}`}>
+                    <button className="
+                      bg-black
+                      hover:bg-[#C9A14A]
+                      text-white
+                      px-6 py-2
+                      rounded-lg
+                      text-sm
+                      font-semibold
+                      transition-all duration-300
+                    ">
+                      Book Now
+                    </button>
+                  </Link>
+                </div>
 
-        <div className="text-sm text-gray-500 mt-1">
-          📞 {center.phone}
-        </div>
-
-        <div className="text-sm text-gray-500 mt-1">
-          🕒 {center.time}
-        </div>
-
-      </div>
-
-
-      {/* Book Button Link */}
-      <div className="mt-4 sm:mt-0 sm:self-end">
-
-        <Link href={`/centers/${center.slug}`}>
-
-          <button className="
-            bg-red-600
-            hover:bg-red-700
-            text-white
-            px-6 py-2
-            rounded-lg
-            text-sm
-            font-medium
-            transition
-          ">
-            Book now
-          </button>
-
-        </Link>
-
-      </div>
-
-    </div>
-
-  </div>
-
-))}
-
+              </div>
+            </div>
+          ))}
         </div>
 
       </div>
-
     </section>
   )
 }

@@ -12,6 +12,7 @@ export default function VideoHero() {
           muted
           playsInline
           preload="auto"
+          
         >
           <source src="/video.mp4" type="video/mp4" />
         </video>

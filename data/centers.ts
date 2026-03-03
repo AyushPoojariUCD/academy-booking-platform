@@ -8,6 +8,9 @@ export type Center = {
   sport: string
   phone: string
   time: string
+  mentors: number
+  courts: number
+  description: string
 }
 
 export const centers: Center[] = [
@@ -22,6 +25,10 @@ export const centers: Center[] = [
     sport: "Badminton",
     phone: "+91 9082229728",
     time: "05:00 AM to 11:00 PM",
+    mentors: 3,
+    courts: 3,
+    description:
+      "A state-of-the-art badminton facility in Dibrugarh offering professional coaching and premium wooden courts for players of all levels.",
   },
   {
     id: 2,
@@ -34,6 +41,10 @@ export const centers: Center[] = [
     sport: "Badminton",
     phone: "+91 9082229728",
     time: "05:00 AM to 11:00 PM",
+    mentors: 5,
+    courts: 9,
+    description:
+      "A premier badminton destination in Punjab known for its spacious courts, structured training programs, and championship-level coaching.",
   },
   {
     id: 3,
@@ -46,6 +57,10 @@ export const centers: Center[] = [
     sport: "Badminton",
     phone: "+91 9082229728, +91 8956977122",
     time: "05:00 AM to 11:00 PM",
+    mentors: 10,
+    courts: 9,
+    description:
+      "Located in Lohegaon, Pune, this academy provides elite-level training with international-standard badminton courts and certified mentors.",
   },
   {
     id: 4,
@@ -58,5 +73,9 @@ export const centers: Center[] = [
     sport: "Badminton",
     phone: "+91 9082229728",
     time: "05:00 AM to 11:00 PM",
+    mentors: 3,
+    courts: 5,
+    description:
+      "Situated inside the prestigious Ramsheth Thakur International Sports Complex, offering premium badminton infrastructure and expert coaching.",
   },
 ]
